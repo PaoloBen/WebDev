@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="Arial" />
+  <title>Facebook</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      overflow-y: scroll;
+    }
+    header {
+      background-color: #c3c3c3;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    header div {
+      font-weight: 400;
+      font-family: "Times New Roman", Times, serif;
+    }
+    header a {
+      text-decoration: none;
+      color: black;
+    }
+    main {
+      display: flex;
+      padding: 20px;
+    }
+    .content {
+      width: 70%;
+    }
+
+    .content p {
+      font-size: 18px;
+    }
+
+    .sidebar {
+      width: 30%;
+      padding-left: 20px;
+      border-left: 1px solid #e9e9e9;
+      background-color: #e9e9e9;
+      color: rgb(0, 0, 0);
+      padding: 50px;
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    .sidebar h3 {
+      margin-bottom: 15px;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 28px;
+      font-weight: normal;
+      text-align: left;
+    }
+
+    .item {
+      background-color: #d9d9d9;
+      color: black;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>Facebook</div>
+    <div><a href="friends.html">Friends</a></div>
+  </header>
+
+  <main>
+    <div class="content">
+      <h1>WELCOME TO FACEBOOK</h1>
+      <p>📱 Social Networking Platform – Connects people worldwide through posts, photos, and videos.</p>
+      <p>💬 Messaging & Chat – Includes Messenger for real-time conversations and group chats.</p>
+      <p>📰 News Feed – Personalized stream of updates from friends, pages, and groups.</p>
+      <p>📸 Media Sharing – Upload and share photos, stories, and live videos easily.</p>
+      <p>👥 Groups & Communities – Join or create interest-based groups for discussions and events.</p>
+      <p>🗓️ Events – Create and manage events with RSVPs, reminders, and details.</p>
+      <p>📈 Marketplace & Ads – Buy/sell items locally and run targeted advertisements.</p>
+      <p>🔒 Privacy Controls – Customize who can see your posts and manage account security.</p>
+    </div>
+
+    <div class="sidebar">
+      <h3>Marketplace</h3>
+      <div id="marketplace"></div>
+    </div>
+  </main>
+
+  <script>
+    fetch('https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('marketplace');
+
+        data.forEach(product => {
+          const item = document.createElement('div');
+          item.className = 'item';
+
+          // Capitalize the first letter of the type
+          const type = product.type.charAt(0).toUpperCase() + product.type.slice(1);
+
+          item.innerHTML = ` 
+            ${product.name.toUpperCase()}<br>
+            $${product.price.toFixed(2)}<br>
+            ${type}
+          `;
+          container.appendChild(item);
+        });
+      });
+  </script>
+</body>
+</html>
